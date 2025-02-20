@@ -1,7 +1,8 @@
-/logs/*
-!/logs/
+logs/*
+!logs/.gitkeep
 
-/outputs/*
+outputs/*
+!outputs/.gitkeep
 
 __pycache__
 
