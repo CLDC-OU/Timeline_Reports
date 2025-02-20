@@ -500,6 +500,8 @@ class FDSReport(Report):
         success_df["Total Applications"] = success_df[apps_cols].astype(int).sum(axis=1)
         success_df["Total Logins"] = success_df[logins_cols].astype(int).sum(axis=1)
 
+        success_df = success_df.drop_duplicates(subset="Student_ID")
+
         ## MELT
         id_vars = ["Student_ID", "FDS_year", "outcome", "outcome_desc", "Total Events", "Total Appointments", "Total Career Fairs", "Total Applications", "Total Logins", "internships", "gender", "honors_college", "college_major", "gpa", "athlete_status", "urm_status", "college_program"]
         value_vars = list(set(success_df.columns) - set(id_vars))
