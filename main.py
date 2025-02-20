@@ -11,7 +11,7 @@ from colorama import Style
 colorama_init()
 
 logfile = f"logs/{dt.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
-if not os.path.exists("/logs"):
+if not os.path.exists("logs"):
     os.makedirs("logs")
 if not os.path.exists("outputs"):
     os.makedirs("outputs")
