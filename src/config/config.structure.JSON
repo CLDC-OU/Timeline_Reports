@@ -1,0 +1,92 @@
+{
+    "Enrollment":
+    {
+        "path": "REQUIRED",
+        "Student_ID": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "term_code_key": {"col_name": "Df COLUMN NAME", "Desc": "REQUIRED"},
+        "college_year": {"col_name": "Df COLUMN NAME", "Desc": "REQUIRED"},
+        "college_program": {"col_name": "Df COLUMN NAME", "Desc": "REQUIRED"},
+        "first_name": {"col_name": "Df COLUMN NAME", "Desc": "OPTIONAL"},
+        "gender": {"col_name": "DF COLUMN NAME", "Desc": "OPTIONAL"},
+        "honors_college": {"col_name": "DF COLUMN NAME", "Desc": "OPTIONAL"},
+        "last_name": {"col_name": "DF COLUMN NAME", "Desc": "OPTIONAL"},
+        "college_major": {"col_name": "DF COLUMN NAME", "Desc": "OPTIONAL"},
+        "gpa": {"col_name": "DF COLUMN NAME", "Desc": "OPTIONAL"},
+        "athlete_status": {"col_name": "DF COLUMN NAME", "Desc": "OPTIONAL"},
+        "urm_status":{"col_name": "DF COLUMN NAME", "Desc": "OPTIONAL"}
+    },
+
+    "Applications":
+    {
+        "path" : "REQUIRED", 
+        "Student_ID": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
+        "Date": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
+        "Email": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"}
+    },
+
+    "Appointments":
+    {
+        "path" : "REQUIRED",
+        "Student_ID": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
+        "Date": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
+        "Email": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"}
+    },
+
+    "Career_Fairs":
+    {
+        "path" : "REQUIRED",
+        "Student_ID": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
+        "Date": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
+        "Email": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"}
+    },    
+
+    "Events":
+    {
+        "path" : "REQUIRED",
+        "Student_ID": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
+        "Date": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
+        "Email": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"}   
+    }, 
+
+    "Logins":
+    {
+        "path" : "REQUIRED",
+        "Student_ID": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
+        "Date": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
+        "Email": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"}         
+    },
+
+    "CLDC_Report":
+    {
+        "path": "REQUIRED",
+        "Email": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "Date": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "Student_ID": {"col_name": "DF COLUMN NAME", "Desc": "OPTIONAL"},
+        "desired_cols": ["REQUIRED INFORMATION OF COLUMNS THAT YOU WOULD LIKE TO ADD FROM ENROLLMENT"]
+    },
+
+    "COM1100_Report":
+    {
+        "path": "REQUIRED",
+        "Student_ID": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
+        "Email": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
+        "Date": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
+        "college_program": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
+        "college_major": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"}        
+    },
+
+    "FDS":
+    {
+        "path": "REQUIRED",
+        "internships": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "internship_emp": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "Date": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "Student_ID": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "outcome": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "FDS_year": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "college_level": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "college_major": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "college_program": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "Email": {"col_name": "DF COLUMN NAME", "Desc": "OPTIONAL"}
+    }
+}
