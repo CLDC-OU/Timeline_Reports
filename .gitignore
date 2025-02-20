@@ -1,0 +1,9 @@
+/logs/*
+!/logs/
+
+/outputs/*
+!/outputs/
+
+__pycache__
+
+csv.config.JSON
