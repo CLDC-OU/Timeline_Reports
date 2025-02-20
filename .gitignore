@@ -2,7 +2,6 @@
 !/logs/
 
 /outputs/*
-!/outputs/
 
 __pycache__
 
