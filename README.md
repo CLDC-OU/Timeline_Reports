@@ -96,4 +96,3 @@ Files are setup in src/config/csv.config.json
 
 > [!NOTE]
 > src/config/config.structure.json includes required and optional formatting guidelines for all necessary reports that can be run in this script.
-# Timeline_Reports
