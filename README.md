@@ -80,7 +80,8 @@ All producable reports are delivered in three types of formats:
    - If installing from github, use `-git clone https://github.com/CLDC-OU/Timeline_Reports`
 3. Configure [Files](#configuring-files)
 4. Configure [Reports](#configuring-reports)
-5. Run main.py
+5. In main.py Driver.run() specify reports you would like to generate. Options include ["FDS", "CLDC", "COM1100"].
+6. Run main.py
 
 ## Dependencies
 
