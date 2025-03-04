@@ -55,7 +55,6 @@ class Driver:
             single_df_agg, single_df_melt, double_df_agg, double_df_melt, no_df_agg, no_df_melt = COM1100Report().generate_reports(enrollment=timeline.enrollment, timeline=timeline.timeline)
             outputs.extend([single_df_agg, single_df_melt, double_df_agg, double_df_melt, no_df_agg, no_df_melt])
             paths.extend(["outputs/singleCOM1100prez_agg.csv", "outputs/singleCOM1100prez_melt.csv",
-                          "outputs/doubleCOM1100prez_agg.csv", "outputs/doubleCOM1100prez_melt.csv",
                           "outputs/noCOM1100prez_agg.csv", "outputs/noCOM1100prez_melt.csv"])
 
         if "FDS" in reports_desired:
