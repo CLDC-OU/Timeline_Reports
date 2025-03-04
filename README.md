@@ -60,11 +60,11 @@ All producable reports are delivered in three types of formats:
 
 > ##### CLDC 
 > Produces two reports that summarize student engagement following a CLDC appointment. The two reports are in the following [Report Types](#generated-report-types) formats:
-> * Timeline
 > * Aggregate
+> * Melt
 
 > ##### COM1100 
-> Produces six reports that summarize student engagement following 1 COM1100 presentation, 2 COM1100 presentations, and no COM1100 presentations. Each of the conditions have 2  reports following [Report Types](#generated-report-types) formats:
+> Produces four reports that summarize student engagement following 1+ COM1100 presentations and no COM1100 presentations. Each of the conditions have 2 reports following [Report Types](#generated-report-types) formats:
 > * Aggregate
 > * Melt
 
