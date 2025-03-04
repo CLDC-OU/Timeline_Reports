@@ -343,7 +343,7 @@ class COM1100Report(Report):
 
         # Final editing of creation of the different student groups: students that attended 1 presentation, 
         # students that attended 2 presentations, and students that didn't attend any.
-        com1100_no_dup = comm_df[comm_df["Student_ID"].drop_duplicates(keep='first')]
+        com1100_no_dup = comm_df.drop_duplicates(subset="Student_ID", keep="first")
         no_com1100 = no_com1100.sort_values("term_code_key").drop_duplicates("Student_ID", keep='first')
 
         # Generate Reports using timeline and the student groups with required columns
