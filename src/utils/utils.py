@@ -72,7 +72,7 @@ def generate_com1100_report(com1100_student_group: pd.DataFrame, timeline: pd.Da
                 |---------------------|-------------|-------------------|-----------------|
     '''
 
-    com1100_timelines = pd.merge(com1100_student_group, timeline[["Student_ID", "Event_Type", "term_code_key", "Date"]], on="Student_ID", how="left", suffixes=('_prez', '_eng'))
+    com1100_timelines = pd.merge(com1100_student_group, timeline[["Student_ID", "Event_Type", "Date"]], on="Student_ID", how="left", suffixes=('_prez', '_eng'))
 
     try:
         com1100_timelines = com1100_timelines[com1100_timelines["Date_prez"] <= com1100_timelines["Date_eng"]]
