@@ -347,8 +347,8 @@ class COM1100Report(Report):
         no_com1100 = no_com1100.sort_values("term_code_key").drop_duplicates("Student_ID", keep='first')
 
         # Generate Reports using timeline and the student groups with required columns
-        single_df_agg, single_df_melt = utils.generate_com1100_report(com1100_student_group=com1100_no_dup[["Date", "Student_ID", "college_program", "college_major", "term_code_key"]], timeline=timeline, tag="single")
-        no_df_agg, no_df_melt = utils.generate_com1100_report(com1100_student_group=no_com1100[["Student_ID", "college_program", "college_major", "term_code_key"]], timeline=timeline, tag="no")
+        single_df_agg, single_df_melt = utils.generate_com1100_report(com1100_student_group=com1100_no_dup[["Date", "Student_ID", "college_program", "college_major"]], timeline=timeline, tag="single")
+        no_df_agg, no_df_melt = utils.generate_com1100_report(com1100_student_group=no_com1100[["Student_ID", "college_program", "college_major"]], timeline=timeline, tag="no")
 
         logging.debug("Successfully returned COM1100 reports")
         print(f'{Fore.GREEN} COM1100 Reports successfully generated! {Style.RESET_ALL}')
