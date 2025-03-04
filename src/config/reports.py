@@ -269,15 +269,15 @@ class COM1100Report(Report):
 
     def generate_reports(self, enrollment: pd.DataFrame, timeline: pd.DataFrame) -> tuple[pd.DataFrame]:
         '''
-        Takes in a timeline of student events and enrollment data and generates 6 different reports that show aggregate and melted engagement following 1 COM1100 presentation,
-        2 COM1100 presentations, and 0 COM1100 presentations.
+        Takes in a timeline of student events and enrollment data and generates 4 different reports that show aggregate and melted engagement following 1+ COM 1100 presentations
+        and 0 COM1100 presentations.
 
         Input(s):
             - enrollment(pd.DataFrame): Dataframe of student enrollment accounted for in the configuration JSON.
             - timeline(pd.DataFrame): Dataframe of student engagement over time (created from Timeline Object)
 
         Returns:
-            - single_df_agg, single_df_melt, double_df_agg, double_df_melt, no_df_agg, no_df_melt (tuple)
+            - single_df_agg, single_df_melt, no_df_agg, no_df_melt (tuple)
                 - Aggregate Format
                     -------------------------------------------------------------------------------------------
                     |      Student_ID     |     ...     |    Applications   |   Appointments  |  ...  |  ...  | 
@@ -333,19 +333,17 @@ class COM1100Report(Report):
 
         # Final editing of creation of the different student groups: students that attended 1 presentation, 
         # students that attended 2 presentations, and students that didn't attend any.
-        com1100_no_dup = comm_df[~comm_df["Student_ID"].duplicated(keep=False)]
-        com1100_dups_only = comm_df[comm_df["Student_ID"].duplicated(keep='first')]
+        com1100_no_dup = comm_df[comm_df["Student_ID"].drop_duplicates(keep='first')]
         no_com1100 = no_com1100.sort_values("term_code_key").drop_duplicates("Student_ID", keep='first')
 
         # Generate Reports using timeline and the student groups with required columns
         single_df_agg, single_df_melt = utils.generate_com1100_report(com1100_student_group=com1100_no_dup[["Date", "Student_ID", "college_program", "college_major"]], timeline=timeline, tag="single")
-        double_df_agg, double_df_melt = utils.generate_com1100_report(com1100_student_group=com1100_dups_only[["Date", "Student_ID", "college_program", "college_major"]], timeline=timeline, tag="double")
         no_df_agg, no_df_melt = utils.generate_com1100_report(com1100_student_group=no_com1100[["Student_ID", "college_program", "college_major"]], timeline=timeline, tag="no")
 
         logging.debug("Successfully returned COM1100 reports")
         print(f'{Fore.GREEN} COM1100 Reports successfully generated! {Style.RESET_ALL}')
 
-        return single_df_agg, single_df_melt, double_df_agg, double_df_melt, no_df_agg, no_df_melt
+        return single_df_agg, single_df_melt, no_df_agg, no_df_melt
         
     @property
     def enrollment(self) -> pd.DataFrame:
