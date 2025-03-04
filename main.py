@@ -68,4 +68,4 @@ class Driver:
             logging.info(f"{path} saved")
             output.to_csv(path)
 
-Driver().run(reports_desired=["FDS"])
+Driver().run(reports_desired=["FDS", "CLDC", "COM1100"])
