@@ -129,19 +129,10 @@ class CLDCReport(Report):
 
     def generate_reports(self, timeline: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
         ''' 
-        Function that takes student engagement timelines and the google CLDC report of referrals and returns dataframes of student engagement timelines and aggregate counts.
+        Function that takes student engagement timelines and the google CLDC report of referrals and returns dataframes of student engagement timelines both aggregated and melted.
         This function has been specialized for the CLDC Referral Google Sheet shared among departments.
 
-        Returns: tuple [Timeline DataFrame (pd.DataFrame), Aggregate DataFrame (pd.DataFrame)]
-
-            Ex: Timeline DataFrame
-            --------------------------------------------------------------------------------------------------
-            |        Email        |     Date     |    Engagement     |       Desc        |    Other Info...  |
-            |---------------------|--------------|-------------------|-------------------|-------------------|
-            | johndoe@oakland.edu |   1/1/2025   |    Career Fair    |  Winter Fair 2025 |        ...        |
-            |---------------------|--------------|-------------------|-------------------|-------------------|
-            |         ...         |     ...      |        ...        |        ...        |        ...        |
-            |---------------------|--------------|-------------------|-------------------|-------------------|
+        Returns: tuple [Aggregate DataFrame (pd.DataFrame), Melt DataFrame (pd.DataFrame)]
 
             Ex: Aggregate DataFrame
             ----------------------------------------------------------------------------------------------
@@ -151,6 +142,15 @@ class CLDCReport(Report):
             |-------------------|----------------|----------------|----------------|----------|----------|
             |       ...         |      ...       |       ...      |       ...      |    ...   |    ...   |
             |-------------------|----------------|----------------|----------------|----------|----------|
+
+            Ex: Melted DataFrame
+            ---------------------------------------------------------------------
+            |      Email        |    Student_ID    |   Event_Type   |   Count   |
+            |-------------------|------------------|----------------|-----------|
+            |  jd@oakland.edu   |     12345        |     Events     |     4     |
+            |-------------------|------------------|----------------|-----------|
+            |       ...         |       ...        |       ...      |    ...    |
+            |-------------------|------------------|----------------|-----------|
 
         '''
         ### FOR TIMELINE REPORT 
@@ -227,10 +227,20 @@ class CLDCReport(Report):
             logging.debug(f"failed to process aggregate cldc report: {e}")
             raise f"failed to process aggregate cldc report: {e}"
 
+        # FOR MELT
+        try:
+            df_melt = df_agg.melt(id_vars=["Student_ID", "Email"], value_vars=["Applications", "Appointments", "Career_Fairs", "Events", "Logins"], var_name="Event_Type", value_name="Count")
+
+            logging.debug("successfully processed melted cldc report")
+
+        except Exception as e:
+            logging.debug(f"failed to process melted cldc report: {e}")
+            raise f"failed to process melted cldc report: {e}"
+
         logging.debug("Successfully returned CLDC reports")
         print(f'{Fore.GREEN} CLDC Reports successfully generated! {Style.RESET_ALL}')
 
-        return df_tl, df_agg
+        return df_agg, df_melt
 
     @property
     def timeline(self) -> pd.DataFrame:
