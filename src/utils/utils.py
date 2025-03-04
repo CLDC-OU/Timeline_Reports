@@ -79,14 +79,14 @@ def generate_com1100_report(com1100_student_group: pd.DataFrame, timeline: pd.Da
     except:
         pass
 
-    com1100_agg = pd.pivot_table(com1100_timelines[["Student_ID", "Event_Type", "college_program", "college_major"]], 
-                                    index=["Student_ID", "college_program", "college_major"], columns=["Event_Type"], aggfunc=len, fill_value=0)
+    com1100_agg = pd.pivot_table(com1100_timelines[["Student_ID", "Event_Type", "college_program", "college_major", "term_code_key"]], 
+                                    index=["Student_ID", "college_program", "college_major", "term_code_key"], columns=["Event_Type"], aggfunc=len, fill_value=0)
  
     com1100_agg.reset_index(inplace=True)
 
     com1100_agg = com1100_agg.fillna(0)
 
-    com1100_melt = com1100_agg.melt(id_vars=["Student_ID", "college_program", "college_major"],
+    com1100_melt = com1100_agg.melt(id_vars=["Student_ID", "college_program", "college_major", "term_code_key"],
                         value_vars=["Applications", "Appointments", "Career_Fairs", "Events", "Logins"],
                         var_name="Event_Type", value_name="Count")
 
