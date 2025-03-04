@@ -353,7 +353,17 @@ class COM1100Report(Report):
         logging.debug("Successfully returned COM1100 reports")
         print(f'{Fore.GREEN} COM1100 Reports successfully generated! {Style.RESET_ALL}')
 
-        return single_df_agg, single_df_melt, no_df_agg, no_df_melt
+        try:
+            com1100_agg = pd.concat([single_df_agg, no_df_agg])
+            com1100_melt = pd.concat([single_df_melt, no_df_melt])
+
+            logging.debug("Successfully combined COM1100 reports")
+        except:
+            logging.error("Error combining com1100 reports")
+            raise "Error combining com1100 reports"
+
+
+        return com1100_agg, com1100_melt
         
     @property
     def enrollment(self) -> pd.DataFrame:

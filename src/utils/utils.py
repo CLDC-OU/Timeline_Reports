@@ -92,6 +92,9 @@ def generate_com1100_report(com1100_student_group: pd.DataFrame, timeline: pd.Da
 
     com1100_melt.fillna(0, inplace=True)
 
+    com1100_agg["Tag"] = tag
+    com1100_melt["Tag"] = tag
+
     logging.debug(f"Generated COM1100 Report for {tag}")
 
     return com1100_agg, com1100_melt
