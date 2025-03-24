@@ -45,7 +45,8 @@
         "path" : "REQUIRED",
         "Student_ID": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
         "Date": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
-        "Email": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"}   
+        "Email": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"},
+        "Events_Name": {"col_name": "HANDSHAKE COLUMN NAME", "Desc": "REQUIRED"} 
     }, 
 
     "Logins":

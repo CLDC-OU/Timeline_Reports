@@ -85,7 +85,7 @@ class Timeline(Config):
             for content in self.contents:
                 df = pd.concat([df, content])
 
-            df = df.loc[:, ["Email", "Student_ID", "Date", "Event_Type"]]
+            df = df.loc[:, ["Email", "Student_ID", "Date", "Event_Type", "Events_Name"]]
         except:
             logging.error("failed to concat. all reports to timeline")
             raise "failed to concat. all reports to timeline"
