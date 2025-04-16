@@ -127,7 +127,7 @@ class CLDCReport(Report):
         self._aggregate_df = None
         self._melt_df = None
 
-    def generate_reports(self, timeline: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+    def generate_reports(self, timeline: pd.DataFramee) -> tuple[pd.DataFrame, pd.DataFrame]:
         ''' 
         Function that takes student engagement timelines and the google CLDC report of referrals and returns dataframes of student engagement timelines both aggregated and melted.
         This function has been specialized for the CLDC Referral Google Sheet shared among departments.
@@ -160,9 +160,6 @@ class CLDCReport(Report):
             # Only desiring students that completed their appointments
             cldc_df = cldc_df[cldc_df["Completed"] == "true"]
 
-            # Get their codes for future usage (in case they don't have engagement following appointment)
-            all_codes = set(cldc_df["Email"])
-            
             # Drop duplicates based on identification (which is "Email")
             cldc_df = cldc_df.sort_values(["Email", "Date"], ascending=False).drop_duplicates(subset=["Email"], keep="first")
 
@@ -171,6 +168,13 @@ class CLDCReport(Report):
             cldc_df.loc[:, 'Date'] = pd.to_datetime(cldc_df['Date'], format='%b %d %Y').dt.strftime('%Y%m%d')
             logging.debug("processed cldc report")
 
+            # Create custom codes for matching term codes on
+            value_list = ['10'] * 6 + ['40'] * 6
+            key_list = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+            months_2key_dict = dict(zip(key_list, value_list))
+
+            cldc_df["Term"] = cldc_df["Date"].str[:4] + cldc_df["Date"].str[4:6].map(months_2key_dict)
+
         except Exception as e:
             logging.error("failed to process cldc report")
             raise f"failed to process cldc report: {e}"
@@ -178,17 +182,23 @@ class CLDCReport(Report):
         # Ensure timeline information has been processed
         if {"Email", "Student_ID", "Event_Type", "Date"}.issubset(set(timeline.columns)):
             # Only desiring specific columns which should be named according to config
-            tmp_engagement = timeline.loc[:, ["Email", "Student_ID", "Event_Type", "Date"]]
+            tmp_engagement = timeline.loc[:, ["Email", "Student_ID", "Event_Type", "Date", "term_code_key"]]
         else:
-            logging.error("cannot generate cldc report because one of required columns ['Email', 'Student_ID', 'Event_Type', 'Date'] is missing")
-            raise "cannot generate cldc report because one of required columns ['Email', 'Student_ID', 'Event_Type', 'Date'] is missing"
+            logging.error("cannot generate cldc report because one of required columns ['Email', 'Student_ID', 'Event_Type', 'Date', 'term_code_key'] is missing")
+            raise "cannot generate cldc report because one of required columns ['Email', 'Student_ID', 'Event_Type', 'Date', 'term_code_key'] is missing"
 
         try:
+            # CLDC PROBLEM RIGHT HERE
+            # LOOK NO FURTHER
+
             # Merge together cldc with engagement to create the timeline
             df = pd.merge(cldc_df, tmp_engagement, on="Email", how="left", suffixes=("_appt", "_eng"))
 
             # Filter to only get entries where date of engagement follow appointment date
             df = df[df["Date_appt"] < df["Date_eng"]]
+
+            df = pd.merge(cldc_df["Email"], df, how="left", on="Email")
+
             df = df.rename(columns={"Date_eng": "Date Engagement", "Date_appt": "Date Appointment"})
 
             # Clean up columns to be a set of desired columns
@@ -204,22 +214,12 @@ class CLDCReport(Report):
         ### FOR AGGREGATE
         try:
             # Use timeline to pivot for aggregate
-            df_agg = pd.pivot_table(df_tl[["Email", "Student_ID", "Event_Type"]], index=["Email", "Student_ID"], columns="Event_Type", aggfunc=len, fill_value=0)
+            df_agg = pd.pivot_table(df_tl[["Email", "Event_Type", "Term"]], index=["Email", "Term"], columns="Event_Type", aggfunc=len, fill_value=0)
 
             df_agg = df_agg.reset_index()
             df_agg.columns.name = None
 
-            # Get students that weren't on the timeline
-            missing_stu = list(all_codes - set(df_agg["Email"]))
-
-            tmp = pd.DataFrame(columns=df_agg.columns)
-            tmp["Email"] = missing_stu
-
-            pd.set_option('future.no_silent_downcasting', True)
-            tmp.fillna(value=0, inplace=True)
-
-            # Put together aggregate with df including people that weren't on timeline
-            df_agg = pd.concat([df_agg, tmp])
+            print(df_agg)
 
             logging.debug("successfully processed aggregate cldc report")
 
@@ -229,7 +229,7 @@ class CLDCReport(Report):
 
         # FOR MELT
         try:
-            df_melt = df_agg.melt(id_vars=["Student_ID", "Email"], value_vars=["Applications", "Appointments", "Career_Fairs", "Events", "Logins"], var_name="Event_Type", value_name="Count")
+            df_melt = df_agg.melt(id_vars=["Email", "Term"], value_vars=["Applications", "Appointments", "Career_Fairs", "Events", "Logins"], var_name="Event_Type", value_name="Count")
 
             logging.debug("successfully processed melted cldc report")
 
