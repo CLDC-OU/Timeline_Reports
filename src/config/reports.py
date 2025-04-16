@@ -127,7 +127,7 @@ class CLDCReport(Report):
         self._aggregate_df = None
         self._melt_df = None
 
-    def generate_reports(self, timeline: pd.DataFramee) -> tuple[pd.DataFrame, pd.DataFrame]:
+    def generate_reports(self, timeline: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
         ''' 
         Function that takes student engagement timelines and the google CLDC report of referrals and returns dataframes of student engagement timelines both aggregated and melted.
         This function has been specialized for the CLDC Referral Google Sheet shared among departments.
@@ -218,8 +218,6 @@ class CLDCReport(Report):
 
             df_agg = df_agg.reset_index()
             df_agg.columns.name = None
-
-            print(df_agg)
 
             logging.debug("successfully processed aggregate cldc report")
 

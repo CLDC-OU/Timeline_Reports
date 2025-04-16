@@ -81,7 +81,8 @@ All producable reports are delivered in three types of formats:
 3. Configure [Files](#configuring-files)
 4. Configure [Reports](#configuring-reports)
 5. In main.py Driver.run() specify reports you would like to generate. Options include ["FDS", "CLDC", "COM1100"].
-6. Run main.py
+6. Run `python main.py --ar [list of desired output document types]`
+   * Options for document types are listed above as [CLDC](#cldc), [FDS](#fds), and [COM1100](#com1100)
 
 ## Dependencies
 

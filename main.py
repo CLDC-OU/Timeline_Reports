@@ -3,6 +3,7 @@ from src.config.timeline import Timeline
 import os
 import logging
 from datetime import datetime as dt
+import argparse
 
 from colorama import init as colorama_init
 from colorama import Fore
@@ -22,11 +23,20 @@ logging.basicConfig(
 )
 logging.info("Log started")
 
+parser = argparse.ArgumentParser(prog="Handshake Timeline Reporting",
+                                 description="A script that uses data from Handshake reports to create a Timeline of all student engagements from 2019-present. With this timeline, the user has the ability to generate several other reports.")
+
+parser.add_argument('-ar', '--add_report_output', help="specifies a list of comma separated reports you'd like to recieve outputs for",
+                    nargs='*', default="CLDC, COM1100, FDS")
+
+args = parser.parse_args()
+
+
 class Driver:
     def __init__(self):
         pass
 
-    def run(self, reports_desired: list[str]) -> None:
+    def run(self, reports_desired: list[str] | str) -> None:
 
         timeline = Timeline()
 
@@ -64,4 +74,4 @@ class Driver:
             logging.info(f"{path} saved")
             output.to_csv(path)
 
-Driver().run(reports_desired=["CLDC"])
+Driver().run(reports_desired=args.add_report_output)
