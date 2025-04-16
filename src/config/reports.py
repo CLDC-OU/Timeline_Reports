@@ -204,7 +204,7 @@ class CLDCReport(Report):
             # Clean up columns to be a set of desired columns
             des_cols = self.config[self.report_type]["desired_cols"]
             df_tl = df[df.columns.intersection(des_cols)]
-            df_tl = df_tl.drop_duplicates(subset=["Student_ID", "Event_Type", "Date Engagement"])
+            df_tl = df_tl.drop_duplicates(subset=["Email", "Event_Type", "Date Engagement"])
             logging.debug("successfully merged cldc report and handshake reports to create timeline")   
 
         except Exception as e:
