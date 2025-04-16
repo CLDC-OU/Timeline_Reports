@@ -13,8 +13,6 @@ colorama_init()
 logfile = f"logs/{dt.now().strftime('%Y-%m-%d_%H-%M-%S')}.log"
 if not os.path.exists("logs"):
     os.makedirs("logs")
-if not os.path.exists("outputs"):
-    os.makedirs("outputs")
 logging.basicConfig(
     filename=logfile,
     encoding='utf-8',
@@ -66,4 +64,4 @@ class Driver:
             logging.info(f"{path} saved")
             output.to_csv(path)
 
-Driver().run(reports_desired=[])
+Driver().run(reports_desired=["CLDC"])
