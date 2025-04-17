@@ -26,7 +26,7 @@ This script can currently create a timeline and 3 different types of reports bas
 All producable reports are delivered in three types of formats: 
 > **Timeline:** Creates a timeline of student identifiers with their engagement types and dates.
 >
->   | Student_ID      | Descriptive Information... | Event_Type      | Date     |
+>   | Identifier      | Descriptive Information... | Event_Type      | Date     |
 >   |-----------------|----------------------------|-----------------|----------|
 >   | 000001          | ...                        | Logins          | 20240101 |
 >   | 000001          | ...                        | Career_Fairs    | 20240103 |
@@ -34,7 +34,7 @@ All producable reports are delivered in three types of formats:
 
 > **Aggregate:** Balances student identifier and descriptive information with timeline aggregate counts.
 >
->   | Student_ID      | Descriptive Information... | Total {Engagement Types}  |
+>   | Identifier      | Descriptive Information... | Total {Engagement Types}  |
 >   |-----------------|----------------------------|---------------------------|
 >   | 000001          | ...                        | 1 | 5 | 7 | 3 | 10        |
 >   | 000002          | ...                        | 2 | 6 | 4 | 5 | 11        |
@@ -42,7 +42,7 @@ All producable reports are delivered in three types of formats:
 
 > * **Melted:** Takes the aggregated report and melts it for use in different visualization softwares.
 >
->   | Student_ID      | Descriptive Information... | Event_Type  | Count | Year      |
+>   | Identifier      | Descriptive Information... | Event_Type  | Count | Year      |
 >   |-----------------|----------------------------|-------------|-------|-----------|
 >   | 000001          | ...                        | Logins      | 10    | Freshman  | 
 >   | 000001          | ...                        | Logins      | 12    | Sophomore | 
