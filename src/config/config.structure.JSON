@@ -6,14 +6,15 @@
         "term_code_key": {"col_name": "Df COLUMN NAME", "Desc": "REQUIRED"},
         "college_year": {"col_name": "Df COLUMN NAME", "Desc": "REQUIRED"},
         "college_program": {"col_name": "Df COLUMN NAME", "Desc": "REQUIRED"},
-        "first_name": {"col_name": "Df COLUMN NAME", "Desc": "OPTIONAL"},
-        "gender": {"col_name": "DF COLUMN NAME", "Desc": "OPTIONAL"},
-        "honors_college": {"col_name": "DF COLUMN NAME", "Desc": "OPTIONAL"},
-        "last_name": {"col_name": "DF COLUMN NAME", "Desc": "OPTIONAL"},
-        "college_major": {"col_name": "DF COLUMN NAME", "Desc": "OPTIONAL"},
-        "gpa": {"col_name": "DF COLUMN NAME", "Desc": "OPTIONAL"},
-        "athlete_status": {"col_name": "DF COLUMN NAME", "Desc": "OPTIONAL"},
-        "urm_status":{"col_name": "DF COLUMN NAME", "Desc": "OPTIONAL"}
+        "first_name": {"col_name": "Df COLUMN NAME", "Desc": "REQUIRED"},
+        "gender": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "honors_college": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "last_name": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "college_major": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "gpa": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "athlete_status": {"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "urm_status":{"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"},
+        "fg":{"col_name": "DF COLUMN NAME", "Desc": "REQUIRED"}
     },
 
     "Applications":

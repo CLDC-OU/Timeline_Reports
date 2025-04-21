@@ -197,14 +197,13 @@ class CLDCReport(Report):
             # Filter to only get entries where date of engagement follow appointment date
             df = df[df["Date_appt"] < df["Date_eng"]]
 
-            df = pd.merge(cldc_df["Email"], df, how="left", on="Email")
-
             df = df.rename(columns={"Date_eng": "Date Engagement", "Date_appt": "Date Appointment"})
 
             # Clean up columns to be a set of desired columns
             des_cols = self.config[self.report_type]["desired_cols"]
             df_tl = df[df.columns.intersection(des_cols)]
             df_tl = df_tl.drop_duplicates(subset=["Email", "Event_Type", "Date Engagement"])
+
             logging.debug("successfully merged cldc report and handshake reports to create timeline")   
 
         except Exception as e:
@@ -218,6 +217,8 @@ class CLDCReport(Report):
 
             df_agg = df_agg.reset_index()
             df_agg.columns.name = None
+
+            df_agg = pd.merge(cldc_df["Email"], df_agg, how="left", on="Email")
 
             logging.debug("successfully processed aggregate cldc report")
 
@@ -479,7 +480,7 @@ class FDSReport(Report):
 
         ## Obtain Total Counts
         # Merge timeline counts to p_status
-        success_df = pd.merge(fds.loc[fds["college_level"] == "Undergraduate", ["Student_ID", "outcome", "internships", "gender", "honors_college", "gpa", "athlete_status", "urm_status",
+        success_df = pd.merge(fds.loc[fds["college_level"] == "Undergraduate", ["Student_ID", "outcome", "internships", "gender", "honors_college", "gpa", "athlete_status", "urm_status", "fg"
                                                                                 "FDS_year", "college_program", "college_major"]].drop_duplicates(), student_event_counts, on=["Student_ID"], how="left")
 
         # Ignore missing p_statuses
