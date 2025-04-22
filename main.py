@@ -26,11 +26,10 @@ logging.info("Log started")
 parser = argparse.ArgumentParser(prog="Handshake Timeline Reporting",
                                  description="A script that uses data from Handshake reports to create a Timeline of all student engagements from 2019-present. With this timeline, the user has the ability to generate several other reports.")
 
-parser.add_argument('-ar', '--add_report_output', help="specifies a list of comma separated reports you'd like to recieve outputs for",
-                    nargs='*', default="CLDC, COM1100, FDS")
+parser.add_argument('-ar', '--add_report_output', type=str, help="specifies a list of comma separated reports you'd like to recieve outputs for",
+                    nargs='*', default=["CLDC", "COM1100", "FDS"])
 
 args = parser.parse_args()
-
 
 class Driver:
     def __init__(self):
