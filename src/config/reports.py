@@ -471,8 +471,8 @@ class FDSReport(Report):
 
         ## AGGREGATION
         # Pivot to create columns like "Event Senior" so we can split up event and class descriptions
-        student_event_counts = pd.pivot_table(timeline_targs[["Student_ID", "Event_Type", "college_year"]], 
-                                              index="Student_ID", columns=["Event_Type", "college_year"], aggfunc=len)
+        student_event_counts = pd.pivot_table(timeline_targs[["Student_ID", "Event_Type", "college_year", "fg"]], 
+                                              index=["Student_ID", "fg"], columns=["Event_Type", "college_year"], aggfunc=len)
 
         # Rename and clean columns
         student_event_counts.columns = [' '.join(col) for col in student_event_counts.columns]
@@ -480,7 +480,7 @@ class FDSReport(Report):
 
         ## Obtain Total Counts
         # Merge timeline counts to p_status
-        success_df = pd.merge(fds.loc[fds["college_level"] == "Undergraduate", ["Student_ID", "outcome", "internships", "gender", "honors_college", "gpa", "athlete_status", "urm_status", "fg"
+        success_df = pd.merge(fds.loc[fds["college_level"] == "Undergraduate", ["Student_ID", "outcome", "internships", "gender", "honors_college", "gpa", "athlete_status", "urm_status",
                                                                                 "FDS_year", "college_program", "college_major"]].drop_duplicates(), student_event_counts, on=["Student_ID"], how="left")
 
         # Ignore missing p_statuses
@@ -520,7 +520,8 @@ class FDSReport(Report):
         success_df = success_df.drop_duplicates(subset="Student_ID")
 
         ## MELT
-        id_vars = ["Student_ID", "FDS_year", "outcome", "outcome_desc", "Total Events", "Total Appointments", "Total Career Fairs", "Total Applications", "Total Logins", "internships", "gender", "honors_college", "college_major", "gpa", "athlete_status", "urm_status", "college_program"]
+        id_vars = ["Student_ID", "FDS_year", "outcome", "outcome_desc", "Total Events", "Total Appointments", "Total Career Fairs", "Total Applications", "Total Logins", "internships", "fg", 
+                   "gender", "honors_college", "college_major", "gpa", "athlete_status", "urm_status", "college_program"]
         value_vars = list(set(success_df.columns) - set(id_vars))
 
         # Create a melted df for Looker
